@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ProductShelvesStatisticsDAO">
+
+    <!--分页查询商品上下架信息统计列表-->
+    <select id="listPage" resultType="com.isxxc.domain.dto.ProductShelvesStatisticsDTO">
+SELECT
+        DATE_FORMAT(gmt_create,   "%Y-%m-%d %H:%m:%s") AS "createDate",
+        DATE_FORMAT(gmt_modified, "%Y-%m-%d %H:%m:%s") AS "modifiedDate",
+        NAME AS "productName",
+        sum( CASE WHEN is_shelves = 1 THEN 1 ELSE 0 END ) AS "onShelvesCount",
+        sum( CASE WHEN is_shelves = 0 THEN 1 ELSE 0 END ) AS "offShelvesCount"
+FROM
+        product_spu
+WHERE
+        is_deleted = 0
+        <if test="params != null ">
+        <choose>
+          <when test="params.startTime != null and params.endTime != null ">
+            AND (#{params.startTime} &lt;= gmt_modified AND gmt_modified &lt;= #{params.endTime})
+          </when>
+          <when test="params.startTime != null">
+            AND #{params.startTime} &lt;= gmt_modified
+          </when>
+          <when test="params.endTime != null ">
+            AND gmt_modified &lt;= #{params.endTime}
+          </when>
+        </choose>
+      </if>
+GROUP BY DAY (gmt_modified) order by (gmt_modified)  DESC
+    </select>
+
+
+    <!--查询商品上下架信息统计列表-->
+    <select id="find" resultType="com.isxxc.domain.dto.ProductShelvesStatisticsDTO">
+        SELECT
+        DATE_FORMAT(gmt_create,   "%Y-%m-%d %H:%m:%s") AS "createDate",
+        DATE_FORMAT(gmt_modified, "%Y-%m-%d %H:%m:%s") AS "modifiedDate",
+        NAME AS "productName",
+        sum( CASE WHEN is_shelves = 1 THEN 1 ELSE 0 END ) AS "onShelvesCount",
+        sum( CASE WHEN is_shelves = 0 THEN 1 ELSE 0 END ) AS "offShelvesCount"
+FROM
+        product_spu
+WHERE
+        is_deleted = 0
+GROUP BY DAY (gmt_modified) order by (gmt_modified)  DESC
+    </select>
+</mapper>

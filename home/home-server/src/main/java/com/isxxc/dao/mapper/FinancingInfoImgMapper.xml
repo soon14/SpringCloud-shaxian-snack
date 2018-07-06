@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.FinancingInfoImgDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.isxxc.domain.entity.FinancingInfoImgDO">
+		<id column="id" property="id" />
+		<result column="financing_info_id" property="financingInfoId" />
+		<result column="name" property="name" />
+		<result column="sort" property="sort" />
+		<result column="gmt_create" property="gmtCreate" />
+	</resultMap>
+
+	<select id="selectByFinancingInfoId" resultMap="BaseResultMap">
+		SELECT id,financing_info_id,name,sort,gmt_create FROM financing_info_img WHERE financing_info_id = #{financingInfoId} ORDER BY sort ASC
+	</select>
+</mapper>

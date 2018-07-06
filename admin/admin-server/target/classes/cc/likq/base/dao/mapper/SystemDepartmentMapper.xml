@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.likq.base.dao.SystemDepartmentDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cc.likq.base.domain.entity.SystemDepartmentDO">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <select id="list" resultMap="BaseResultMap">
+        SELECT id,name,parent_id FROM system_department WHERE is_deleted =#{deletedState}
+        <if test="parentId != null">
+            AND parent_id = #{parentId}
+        </if>
+        <if test="name != null and name != ''">
+            AND name LIKE CONCAT('%',#{name},'%')
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.AdContentImgDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.AdContentImgDO">
+        <id column="id" property="id"/>
+        <result column="ad_content_id" property="adContentId"/>
+        <result column="title" property="title"/>
+        <result column="name" property="name"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.AdContentImgDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer"/>
+            <arg column="ad_content_id" javaType="java.lang.Integer"/>
+            <arg column="title" javaType="java.lang.String"/>
+            <arg column="name" javaType="java.lang.String"/>
+            <arg column="sort" javaType="java.lang.Integer"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_create" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectByAdContentId" resultMap="DtoBaseResultMap">
+        SELECT
+        id,ad_content_id,title,name,sort,gmt_modified,gmt_create
+        FROM ad_content_img
+        WHERE ad_content_id = #{adContentId}
+        ORDER BY sort ASC
+    </select>
+</mapper>

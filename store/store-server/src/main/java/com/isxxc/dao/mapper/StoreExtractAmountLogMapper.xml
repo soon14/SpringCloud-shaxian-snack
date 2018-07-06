@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.StoreExtractAmountLogDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.StoreExtractAmountLogDO">
+        <id column="id" property="id"/>
+        <result column="store_id" property="storeId"/>
+        <result column="bank_name" property="bankName"/>
+        <result column="bank_user_name" property="bankUserName"/>
+        <result column="bank_no" property="bankNo"/>
+        <result column="extract_amount" property="extractAmount"/>
+        <result column="poundage" property="poundage"/>
+        <result column="settlement_amount" property="settlementAmount"/>
+        <result column="remark_service" property="remarkService"/>
+        <result column="admin_id" property="adminId"/>
+        <result column="audit_state" property="auditState"/>
+        <result column="settlement_state" property="settlementState"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="DtoResultMap" type="com.isxxc.domain.dto.StoreExtractAmountLogDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer"/>
+            <arg column="store_id" javaType="java.lang.Integer"/>
+            <arg column="bank_name" javaType="java.lang.String"/>
+            <arg column="bank_user_name" javaType="java.lang.String"/>
+            <arg column="bank_no" javaType="java.lang.String"/>
+            <arg column="extract_amount" javaType="java.lang.Long"/>
+            <arg column="poundage" javaType="java.lang.Long"/>
+            <arg column="settlement_amount" javaType="java.lang.Long"/>
+            <arg column="remark_service" javaType="java.lang.String"/>
+            <arg column="admin_id" javaType="java.lang.Integer"/>
+            <arg column="audit_state" javaType="java.lang.Integer"/>
+            <arg column="settlement_state" javaType="java.lang.Integer"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_create" javaType="java.util.Date"/>
+            <arg column="storeName" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+
+    <select id="extractProcessAmountByStoreId" resultType="java.lang.Long">
+        SELECT IFNULL(SUM(extract_amount),0) AS extractProcessAmount FROM `store_extract_amount_log` WHERE store_id = #{storeId}
+    </select>
+
+    <select id="listPage" resultMap="DtoResultMap">
+        SELECT e.*,
+        (SELECT s.company_name FROM `user_store_profil` AS s WHERE s.id = e.`store_id`) AS storeName
+        FROM `store_extract_amount_log` AS e
+        <where>
+            <if test="params != null ">
+                <if test="params.settlementState != null ">
+                    AND e.`settlement_state` = #{params.settlementState}
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="getInfoById" resultMap="DtoResultMap">
+      SELECT e.*,
+        (SELECT s.company_name FROM `user_store_profil` AS s WHERE s.id = e.`store_id`) AS storeName
+      FROM `store_extract_amount_log` AS e WHERE e.id = #{id} LIMIT 1
+    </select>
+</mapper>

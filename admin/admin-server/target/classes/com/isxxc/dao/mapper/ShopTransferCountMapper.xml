@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ShopTransferCountDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ShopTransferDO">
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="title" property="title" />
+		<result column="subtitle" property="subtitle" />
+		<result column="identity" property="identity" />
+		<result column="rent_amount" property="rentAmount" />
+		<result column="transfer_amount" property="transferAmount" />
+		<result column="acreage" property="acreage" />
+		<result column="contacts" property="contacts" />
+		<result column="mobile_no" property="mobileNo" />
+		<result column="province_code" property="provinceCode" />
+		<result column="city_code" property="cityCode" />
+		<result column="area_code" property="areaCode" />
+		<result column="address" property="address" />
+		<result column="description" property="description" />
+		<result column="longitude" property="longitude" />
+		<result column="latitude" property="latitude" />
+		<result column="audit_state" property="auditState" />
+		<result column="puslish_state" property="puslishState" />
+		<result column="publish_time" property="publishTime" />
+		<result column="is_recommend" property="isRecommend" />
+		<result column="recommend_time" property="recommendTime" />
+		<result column="is_deleted" property="isDeleted" />
+		<result column="gmt_modified" property="gmtModified" />
+		<result column="gmt_create" property="gmtCreate" />
+	</resultMap>
+
+    <resultMap id="DtoResultMap" type="com.isxxc.domain.dto.ShopTransferCountDTO">
+    <result column="countAttornShop" property="countAttornShop" />
+    <result column="countRentingShop" property="countRentingShop" />
+    </resultMap>
+
+    <select id="countAttornShop" parameterType="com.isxxc.domain.dto.ShopTransferCountDTO" resultType="Integer">
+        SELECT COUNT(*) AS countAttornShop from shop_transfer WHERE id=1;
+    </select>
+
+    <select id="countRentingShop" parameterType="com.isxxc.domain.dto.ShopTransferCountDTO" resultType="Integer">
+        SELECT COUNT(*) AS countRentingShop from shop_transfer WHERE id=2;
+    </select>
+
+    <select id="listPage" resultType="com.isxxc.domain.dto.UserAccountOtherDTO">
+        SELECT
+        gmt_create AS date,
+        title AS name,
+        COUNT(subtitle) AS sum
+        FROM shop_transfer
+        <where>
+            <if test="userAccountR != null">
+                <choose>
+                    <when test="userAccountR.startTime != null and userAccountR.endTime != null ">
+                        AND (#{userAccountR.startTime} &lt;= gmt_create AND gmt_create &lt;= #{userAccountR.endTime})
+                    </when>
+                    <when test="userAccountR.startTime != null">
+                        AND #{userAccountR.startTime} &lt;= gmt_create
+                    </when>
+                    <when test="userAccountR.endTime != null ">
+                        AND gmt_create &lt;= #{userAccountR.endTime}
+                    </when>
+                </choose>
+            </if>
+        </where>
+        GROUP BY gmt_create
+    </select>
+</mapper>

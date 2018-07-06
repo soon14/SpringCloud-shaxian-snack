@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ProductSkuInfoDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ProductSkuInfoDO">
+        <id column="id" property="id"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="img" property="img"/>
+        <result column="price_type" property="priceType"/>
+        <result column="market_price" property="marketPrice"/>
+        <result column="sale_price" property="salePrice"/>
+        <result column="is_shelves" property="isShelves"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.ProductSkuInfoDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer"/>
+            <arg column="spu_id" javaType="java.lang.Integer"/>
+            <arg column="img" javaType="java.lang.String"/>
+            <arg column="price_type" javaType="java.lang.Integer"/>
+            <arg column="market_price" javaType="java.lang.Long"/>
+            <arg column="sale_price" javaType="java.lang.Long"/>
+            <arg column="is_shelves" javaType="java.lang.Integer"/>
+            <arg column="is_deleted" javaType="java.lang.Integer"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_create" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectBySpuId" resultMap="DtoBaseResultMap">
+       SELECT
+        id,spu_id,img,price_type,market_price,sale_price,is_shelves,is_deleted,gmt_modified,gmt_create
+      FROM
+        product_sku_info
+      WHERE
+       spu_id = #{spuId} AND is_deleted = #{isDeleted}
+    </select>
+
+    <select id="selectDTOById" resultMap="DtoBaseResultMap">
+      SELECT
+        id,spu_id,img,price_type,market_price,sale_price,is_shelves,is_deleted,gmt_modified,gmt_create
+      FROM
+        product_sku_info
+      WHERE
+        id = #{id}
+    </select>
+
+    <update id="updateShelvesBySpuId">
+        UPDATE `product_sku_info` SET is_shelves = #{shelvesCode},gmt_modified = NOW() WHERE spu_id =#{spuId} AND is_deleted =#{isDeleted}
+    </update>
+</mapper>

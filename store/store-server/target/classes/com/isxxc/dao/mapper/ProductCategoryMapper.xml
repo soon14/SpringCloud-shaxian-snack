@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ProductCategoryDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ProductCategoryDO">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="sort" property="sort"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.ProductCategoryDTO">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="sort" property="sort"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <sql id="baseColumn">
+        id,parent_id,name,sort,is_deleted,gmt_modified,gmt_create
+    </sql>
+
+    <select id="selectDTOList" resultMap="DtoBaseResultMap">
+        SELECT
+        <include refid="baseColumn"/>
+        FROM
+        product_category
+        WHERE is_deleted = #{isDeleted}
+    </select>
+
+    <select id="selectChildId" resultType="java.lang.Integer">
+        SELECT id FROM product_category WHERE parent_id = #{parentId}
+    </select>
+
+</mapper>

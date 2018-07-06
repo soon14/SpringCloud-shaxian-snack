@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.UserRoleRelationDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.UserRoleRelationDO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_code" property="roleCode"/>
+        <result column="is_disable" property="isDisable"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+		SELECT id,user_id,role_code,is_disable,gmt_create FROM user_role_relation WHERE user_id = #{userId}
+    </select>
+
+    <select id="getCodesByUserId" resultType="java.lang.String">
+        SELECT role_code FROM user_role_relation WHERE user_id = #{userId} AND is_disable = #{isDisable}
+    </select>
+</mapper>

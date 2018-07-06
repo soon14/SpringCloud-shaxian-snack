@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.UserStoreProfilDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.isxxc.domain.entity.UserStoreProfilDO">
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="company_name" property="companyName" />
+		<result column="address" property="address" />
+		<result column="contact" property="contact" />
+		<result column="mobile_no" property="mobileNo" />
+		<result column="individual_business_license_img" property="individualBusinessLicenseImg" />
+		<result column="identity_card_front_img" property="identityCardFrontImg" />
+		<result column="identity_card_back_img" property="identityCardBackImg" />
+		<result column="bank_img" property="bankImg" />
+		<result column="business_license_img" property="businessLicenseImg" />
+		<result column="bank_user_name" property="bankUserName" />
+		<result column="bank_name" property="bankName" />
+		<result column="bank_no" property="bankNo" />
+		<result column="logo" property="logo" />
+		<result column="audit_state" property="auditState" />
+		<result column="gmt_modified" property="gmtModified" />
+		<result column="gmt_create" property="gmtCreate" />
+	</resultMap>
+
+</mapper>

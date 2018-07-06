@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.UserFunctionDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.UserFunctionDO">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="level" property="level"/>
+        <result column="function_url" property="functionUrl"/>
+        <result column="route_url" property="routeUrl"/>
+        <result column="icon" property="icon"/>
+        <result column="is_show" property="isShow"/>
+        <result column="is_auth" property="isAuth"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="BaseResultDTOMap" type="com.isxxc.domain.dto.UserFunctionDTO">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="level" property="level"/>
+        <result column="function_url" property="functionUrl"/>
+        <result column="route_url" property="routeUrl"/>
+        <result column="icon" property="icon"/>
+        <result column="is_show" property="isShow"/>
+        <result column="is_auth" property="isAuth"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <sql id="baseColumn">
+        id,type,parent_id,name,code,level,function_url,route_url,icon,is_show,is_auth,gmt_modified,gmt_create
+    </sql>
+
+    <select id="list" resultMap="BaseResultDTOMap">
+		SELECT <include refid="baseColumn"/> FROM user_function
+	</select>
+
+    <select id="selectByCode" resultMap="BaseResultDTOMap">
+		SELECT <include refid="baseColumn"/> FROM user_function WHERE code = #{code}
+	</select>
+</mapper>

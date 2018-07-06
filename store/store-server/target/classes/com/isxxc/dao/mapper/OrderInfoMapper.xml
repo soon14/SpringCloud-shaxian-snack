@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.OrderInfoDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.OrderInfoDO">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="user_id" property="userId"/>
+        <result column="store_id" property="storeId"/>
+        <result column="master_state" property="masterState"/>
+        <result column="deliver_state" property="deliverState"/>
+        <result column="payment_state" property="paymentState"/>
+        <result column="express_state" property="expressState"/>
+        <result column="return_state" property="returnState"/>
+        <result column="cancel_state" property="cancelState"/>
+        <result column="comment_state" property="commentState"/>
+        <result column="order_source" property="orderSource"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="actual_price" property="actualPrice"/>
+        <result column="coupon_price" property="couponPrice"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="activity_discount_price" property="activityDiscountPrice"/>
+        <result column="activity_discount_id" property="activityDiscountId"/>
+        <result column="freight_price" property="freightPrice"/>
+        <result column="payment_type" property="paymentType"/>
+        <result column="payment_time" property="paymentTime"/>
+        <result column="payment_no" property="paymentNo"/>
+        <result column="express_no" property="expressNo"/>
+        <result column="express_code" property="expressCode"/>
+        <result column="express_name" property="expressName"/>
+        <result column="consignee_name" property="consigneeName"/>
+        <result column="consignee_mobile" property="consigneeMobile"/>
+        <result column="consignee_address" property="consigneeAddress"/>
+        <result column="deliver_time" property="deliverTime"/>
+        <result column="remark_user" property="remarkUser"/>
+        <result column="remark_service" property="remarkService"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.OrderInfoDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer"/>
+            <arg column="order_no" javaType="java.lang.String"/>
+            <arg column="user_id" javaType="java.lang.Integer"/>
+            <arg column="store_id" javaType="java.lang.Integer"/>
+            <arg column="master_state" javaType="java.lang.Integer"/>
+            <arg column="deliver_state" javaType="java.lang.Integer"/>
+            <arg column="payment_state" javaType="java.lang.Integer"/>
+            <arg column="express_state" javaType="java.lang.Integer"/>
+            <arg column="return_state" javaType="java.lang.Integer"/>
+            <arg column="cancel_state" javaType="java.lang.Integer"/>
+            <arg column="comment_state" javaType="java.lang.Integer"/>
+            <arg column="order_source" javaType="java.lang.Integer"/>
+            <arg column="total_price" javaType="java.lang.Long"/>
+            <arg column="actual_price" javaType="java.lang.Long"/>
+            <arg column="coupon_price" javaType="java.lang.Long"/>
+            <arg column="coupon_id" javaType="java.lang.Integer"/>
+            <arg column="activity_discount_price" javaType="java.lang.Long"/>
+            <arg column="activity_discount_id" javaType="java.lang.Integer"/>
+            <arg column="freight_price" javaType="java.lang.Long"/>
+            <arg column="payment_type" javaType="java.lang.Integer"/>
+            <arg column="payment_time" javaType="java.util.Date"/>
+            <arg column="payment_no" javaType="java.lang.String"/>
+            <arg column="express_no" javaType="java.lang.String"/>
+            <arg column="express_code" javaType="java.lang.String"/>
+            <arg column="express_name" javaType="java.lang.String"/>
+            <arg column="consignee_name" javaType="java.lang.String"/>
+            <arg column="consignee_mobile" javaType="java.lang.String"/>
+            <arg column="consignee_address" javaType="java.lang.String"/>
+            <arg column="deliver_time" javaType="java.util.Date"/>
+            <arg column="remark_user" javaType="java.lang.String"/>
+            <arg column="remark_service" javaType="java.lang.String"/>
+            <arg column="is_deleted" javaType="java.lang.Integer"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_create" javaType="java.util.Date"/>
+            <arg column="storeName" javaType="java.lang.String"/>
+            <arg column="storeMobileNo" javaType="java.lang.String"/>
+            <arg column="userNickname" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectByOrderNoList" resultMap="BaseResultMap">
+        SELECT * FROM order_info WHERE order_no IN
+        <foreach collection="orderNoList" item="orderNo" open="(" close=")" separator=",">
+            #{orderNo}
+        </foreach>
+    </select>
+
+    <select id="selectListPage" resultMap="DtoBaseResultMap">
+        SELECT
+          o.*,
+          s.`company_name` AS storeName,
+          s.`mobile_no` AS storeMobileNo,
+         (select u.nickname from `user_account` as u where u.id = o.`user_id`) as userNickname
+        FROM
+          `order_info` AS o
+          LEFT JOIN `user_store_profil` AS s
+            ON o.`store_id` = s.`id`
+        WHERE
+          o.`is_deleted` = #{params.isDeleted}
+          <if test="params.userId != null ">
+              AND o.user_id = #{params.userId}
+          </if>
+          <if test="params.storeId != null ">
+              AND o.store_id = #{params.storeId}
+          </if>
+          <if test="params.orderNo != null ">
+              AND o.order_no = #{params.orderNo}
+          </if>
+          <if test="params.consigneeName != null ">
+              AND o.consignee_name LIKE CONCAT('%','${params.consigneeName}','%')
+          </if>
+          <if test="params.consigneeMobile != null ">
+              AND o.consignee_mobile LIKE CONCAT('%','${params.consigneeMobile}','%')
+          </if>
+          <choose>
+              <when test="params.startTime != null and params.endTime != null ">
+                  AND (#{params.startTime} &lt;= o.gmt_create AND o.gmt_create &lt;= #{params.endTime})
+              </when>
+              <when test="params.startTime != null">
+                  AND #{params.startTime} &lt;= o.gmt_create
+              </when>
+              <when test="params.endTime != null ">
+                  AND o.gmt_create &lt;= #{params.endTime}
+              </when>
+          </choose>
+          <if test="params.masterState != null">
+              AND master_state = #{params.masterState}
+              <if test="params.paymentState != null">
+                AND o.payment_state = #{params.paymentState}
+              </if>
+              <if test="params.deliverState != null">
+                  AND o.deliver_state = #{params.deliverState}
+              </if>
+              <if test="params.commentState != null">
+                  AND o.comment_state = #{params.commentState}
+              </if>
+          </if>
+          ORDER BY gmt_modified DESC
+    </select>
+
+    <select id="selectDTOById" resultMap="DtoBaseResultMap">
+         SELECT
+          o.*,
+          s.`company_name` AS storeName,
+          s.`mobile_no` AS storeMobileNo,
+         (select u.nickname from `user_account` as u where u.id = o.`user_id`) as userNickname
+        FROM
+          `order_info` AS o
+          LEFT JOIN `user_store_profil` AS s
+            ON o.`store_id` = s.`id`
+        WHERE
+          o.id = #{params.id}
+          <if test="params.userId != null">
+             AND o.user_id = #{params.userId}
+          </if>
+          <if test="params.storeId != null">
+              AND o.store_id = #{params.storeId}
+          </if>
+    </select>
+
+    <select id="selectByOrderNoAndStoreId" resultType="com.isxxc.domain.entity.OrderInfoDO">
+      SELECT * FROM order_info WHERE store_id = #{storeId} AND order_no = #{orderNo} LIMIT 1
+    </select>
+
+
+
+    <select id="selectListBypaymentNo" resultType="com.isxxc.domain.entity.OrderInfoDO">
+        SELECT * FROM order_info WHERE payment_no = #{paymentNo}
+    </select>
+</mapper>

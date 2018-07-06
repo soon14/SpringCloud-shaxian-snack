@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.AreaDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.isxxc.domain.entity.AreaDO">
+		<id column="code" property="code" />
+		<result column="name" property="name" />
+		<result column="parent_code" property="parentCode" />
+	</resultMap>
+
+	<select id="selectByParentCode" resultMap="BaseResultMap">
+		  SELECT code,name,parent_code FROM area WHERE parent_code = #{parentCode}
+	</select>
+</mapper>

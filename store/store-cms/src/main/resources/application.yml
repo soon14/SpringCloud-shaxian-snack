@@ -1,0 +1,27 @@
+server:
+  #tomcat运行端口
+  port: 9962
+spring:
+  profiles:
+    active: dev
+  application:
+    name: store-cms
+  http:
+    encoding:
+      force: false
+      enabled: true
+      charset: UTF-8
+    multipart:
+      #默认支持文件上传
+      enabled: true
+      #支持文件写入磁盘
+      file-size-threshold: 0
+      # 最大支持文件大小
+      max-file-size: 100Mb
+      # 最大支持请求大小
+      max-request-size: 100Mb
+
+#Feign服务
+feign-client:
+  store-server: store-server
+  common-server: common-server

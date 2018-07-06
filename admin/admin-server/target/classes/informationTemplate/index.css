@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#title, #subTitle {
+    text-align: center;
+}
+
+#title {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.9rem;
+}
+
+#subTitle span {
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 15px;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.UserFunctionDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.UserFunctionDO">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="level" property="level"/>
+        <result column="function_url" property="functionUrl"/>
+        <result column="route_url" property="routeUrl"/>
+        <result column="icon" property="icon"/>
+        <result column="is_show" property="isShow"/>
+        <result column="is_auth" property="isAuth"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <select id="getIgnoreUrl" resultType="java.lang.String">
+      SELECT function_url FROM user_function WHERE is_auth = 0
+    </select>
+
+</mapper>

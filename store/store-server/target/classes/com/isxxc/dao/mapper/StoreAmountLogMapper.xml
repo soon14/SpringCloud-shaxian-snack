@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.StoreAmountLogDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.StoreAmountLogDO">
+        <id column="id" property="id"/>
+        <result column="store_amount_id" property="storeAmountId"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="amount" property="amount"/>
+        <result column="bofore_amount" property="boforeAmount"/>
+        <result column="type" property="type"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+</mapper>

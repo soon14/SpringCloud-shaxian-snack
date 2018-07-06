@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ProductSkuSpecRelationDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ProductSkuSpecRelationDO">
+        <id column="id" property="id" />
+        <result column="sku_id" property="skuId" />
+        <result column="spec_value_id" property="specValueId" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="gmt_create" property="gmtCreate" />
+    </resultMap>
+
+</mapper>

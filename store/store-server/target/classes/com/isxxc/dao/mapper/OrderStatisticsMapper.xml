@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.OrderStatisticsDAO">
+
+    <select id="listPage" resultType="com.isxxc.domain.dto.OrderStatisticsDTO">
+      SELECT
+        gmt_create as date,
+        COUNT(DISTINCT user_id) AS userCount,
+        COUNT(order_no) AS orderCount,
+        SUM(actual_price) AS totalAmount,
+        COUNT(DISTINCT IF(payment_state = 1,user_id,NULL)) AS userPayCount,
+        COUNT(DISTINCT IF(payment_state = 1,order_no,NULL)) AS orderPayCount,
+        SUM(IF(payment_state = 1,actual_price,0)) AS payTotalAmount
+      FROM `order_info`
+      WHERE is_deleted = 0
+      <if test="params != null ">
+        <choose>
+          <when test="params.startTime != null and params.endTime != null ">
+            AND (#{params.startTime} &lt;= gmt_create AND gmt_create &lt;= #{params.endTime})
+          </when>
+          <when test="params.startTime != null">
+            AND #{params.startTime} &lt;= gmt_create
+          </when>
+          <when test="params.endTime != null ">
+            AND gmt_create &lt;= #{params.endTime}
+          </when>
+        </choose>
+      </if>
+      GROUP BY DAY (gmt_create)
+    </select>
+</mapper>

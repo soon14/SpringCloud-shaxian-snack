@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.likq.base.dao.SystemRoleDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cc.likq.base.domain.entity.SystemRoleDO">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="gmt_modified" property="gmtModified" />
+		<result column="gmt_create" property="gmtCreate" />
+	</resultMap>
+
+	<!--分页查询系统角色-->
+    <select id="listPage" resultType="cc.likq.base.domain.entity.SystemRoleDO" resultMap="BaseResultMap">
+	select * from system_role where is_deleted=0
+	</select>
+
+
+	<!--查询系统角色-->
+	<select id="query" resultType="cc.likq.base.domain.entity.SystemRoleDO" resultMap="BaseResultMap">
+	select * from system_role where is_deleted=0
+	</select>
+
+</mapper>

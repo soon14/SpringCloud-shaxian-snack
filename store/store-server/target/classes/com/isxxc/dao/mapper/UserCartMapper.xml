@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.UserCartDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.UserCartDO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="store_id" property="storeId"/>
+        <result column="price_type" property="priceType"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="sale_price" property="salePrice"/>
+        <result column="num" property="num"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.UserCartDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long"/>
+            <arg column="user_id" javaType="java.lang.Integer"/>
+            <arg column="store_id" javaType="java.lang.Integer"/>
+            <arg column="price_type" javaType="java.lang.Integer"/>
+            <arg column="spu_id" javaType="java.lang.Integer"/>
+            <arg column="sku_id" javaType="java.lang.Integer"/>
+            <arg column="sale_price" javaType="java.lang.Long"/>
+            <arg column="num" javaType="java.lang.Integer"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_create" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectDTOByUserId" resultMap="DtoBaseResultMap">
+      SELECT
+        *
+      FROM
+        user_cart
+      WHERE
+        user_id = #{userId}
+      ORDER BY gmt_modified DESC
+    </select>
+
+    <delete id="deleteByIdList">
+        DELETE FROM `user_cart` WHERE user_id = #{userId} AND id IN
+        <foreach collection="idList" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

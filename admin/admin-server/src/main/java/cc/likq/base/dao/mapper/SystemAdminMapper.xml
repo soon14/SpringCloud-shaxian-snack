@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.likq.base.dao.SystemAdminDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cc.likq.base.domain.entity.SystemAdminDO">
+        <id column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="position" property="position"/>
+        <result column="department_id" property="departmentId"/>
+        <result column="mobile_no" property="mobileNo"/>
+        <result column="email" property="email"/>
+        <result column="qq" property="qq"/>
+        <result column="is_disable" property="isDisable"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+    <sql id="columns">
+          id, account, password, name, position, department_id, mobile_no, email, qq,is_disable, gmt_modified, gmt_create
+    </sql>
+
+    <select id="getByAccount" resultMap="BaseResultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM system_admin WHERE account = #{account}
+    </select>
+</mapper>

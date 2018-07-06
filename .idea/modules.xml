@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/admin/admin.iml" filepath="$PROJECT_DIR$/admin/admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/admin/admin-feign/admin-feign.iml" filepath="$PROJECT_DIR$/admin/admin-feign/admin-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/admin/admin-server/admin-server.iml" filepath="$PROJECT_DIR$/admin/admin-server/admin-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-feign/common-feign.iml" filepath="$PROJECT_DIR$/common/common-feign/common-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-model/common-model.iml" filepath="$PROJECT_DIR$/common/common-model/common-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-server/common-server.iml" filepath="$PROJECT_DIR$/common/common-server/common-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-util/common-util.iml" filepath="$PROJECT_DIR$/common/common-util/common-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/generator/generator.iml" filepath="$PROJECT_DIR$/generator/generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/home/home.iml" filepath="$PROJECT_DIR$/home/home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/home/home-feign/home-feign.iml" filepath="$PROJECT_DIR$/home/home-feign/home-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/home/home-server/home-server.iml" filepath="$PROJECT_DIR$/home/home-server/home-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shaxian.iml" filepath="$PROJECT_DIR$/shaxian.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shaxian.iml" filepath="$PROJECT_DIR$/shaxian.iml" />
+      <module fileurl="file://$PROJECT_DIR$/store/store.iml" filepath="$PROJECT_DIR$/store/store.iml" />
+      <module fileurl="file://$PROJECT_DIR$/store/store-api/store-api.iml" filepath="$PROJECT_DIR$/store/store-api/store-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/store/store-cms/store-cms.iml" filepath="$PROJECT_DIR$/store/store-cms/store-cms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/store/store-feign/store-feign.iml" filepath="$PROJECT_DIR$/store/store-feign/store-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/store/store-server/store-server.iml" filepath="$PROJECT_DIR$/store/store-server/store-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user/user.iml" filepath="$PROJECT_DIR$/user/user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user/user-api/user-api.iml" filepath="$PROJECT_DIR$/user/user-api/user-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user/user-auth/user-auth.iml" filepath="$PROJECT_DIR$/user/user-auth/user-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user/user-feign/user-feign.iml" filepath="$PROJECT_DIR$/user/user-feign/user-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user/user-server/user-server.iml" filepath="$PROJECT_DIR$/user/user-server/user-server.iml" />
+    </modules>
+  </component>
+</project>

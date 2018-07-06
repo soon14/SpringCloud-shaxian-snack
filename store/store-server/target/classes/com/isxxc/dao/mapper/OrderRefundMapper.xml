@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.OrderRefundDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.OrderRefundDO">
+        <id column="id" property="id"/>
+        <result column="refund_no" property="refundNo"/>
+        <result column="refund_mode" property="refundMode"/>
+        <result column="manual_refund_price" property="manualRefundPrice"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="master_state" property="masterState"/>
+        <result column="order_source" property="orderSource"/>
+        <result column="payment_no" property="paymentNo"/>
+        <result column="payment_state" property="paymentState"/>
+        <result column="payment_type" property="paymentType"/>
+        <result column="payment_time" property="paymentTime"/>
+        <result column="remark_service" property="remarkService"/>
+        <result column="remark_user" property="remarkUser"/>
+        <result column="store_id" property="storeId"/>
+        <result column="store_mobileno" property="storeMobileno"/>
+        <result column="store_name" property="storeName"/>
+        <result column="user_nickname" property="userNickname"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="actual_price" property="actualPrice"/>
+        <result column="freight_price" property="freightPrice"/>
+        <result column="coupon_price" property="couponPrice"/>
+        <result column="coupon_id" property="couponId"/>
+        <result column="activity_discount_price" property="activityDiscountPrice"/>
+        <result column="activity_discount_id" property="activityDiscountId"/>
+        <result column="consignee_name" property="consigneeName"/>
+        <result column="consignee_mobile" property="consigneeMobile"/>
+        <result column="consignee_address" property="consigneeAddress"/>
+        <result column="deliver_state" property="deliverState"/>
+        <result column="deliver_time" property="deliverTime"/>
+        <result column="express_no" property="expressNo"/>
+        <result column="express_code" property="expressCode"/>
+        <result column="express_name" property="expressName"/>
+        <result column="express_state" property="expressState"/>
+        <result column="order_id" property="orderId"/>
+        <result column="order_gmtcreate" property="orderGmtcreate"/>
+        <result column="order_gmtmodified" property="orderGmtmodified"/>
+        <result column="apply_state" property="applyState"/>
+        <result column="return_type" property="returnType"/>
+        <result column="return_state" property="returnState"/>
+        <result column="auditor1" property="auditor1"/>
+        <result column="auditor2" property="auditor2"/>
+        <result column="audit_time1" property="auditTime1"/>
+        <result column="audit_time2" property="auditTime2"/>
+        <result column="audit_reason1" property="auditReason1"/>
+        <result column="audit_reason2" property="auditReason2"/>
+        <result column="refund_person" property="refundPerson"/>
+        <result column="refund_time" property="refundTime"/>
+        <result column="return_update" property="returnUpdate"/>
+        <result column="return_create" property="returnCreate"/>
+        <result column="field1" property="field1"/>
+        <result column="field2" property="field2"/>
+        <result column="field3" property="field3"/>
+        <result column="field4" property="field4"/>
+        <result column="field5" property="field5"/>
+    </resultMap>
+
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.OrderInfoDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer"/>
+            <arg column="refund_no" javaType="java.lang.String"/>
+            <arg column="refund_mode" javaType="java.lang.String"/>
+            <arg column="manual_refund_price" javaType="java.lang.String"/>
+            <arg column="order_no" javaType="java.lang.String"/>
+            <arg column="master_state" javaType="java.lang.Integer"/>
+            <arg column="order_source" javaType="java.lang.Integer"/>
+            <arg column="payment_no" javaType="java.lang.String"/>
+            <arg column="payment_state" javaType="java.lang.Integer"/>
+            <arg column="payment_type" javaType="java.lang.Integer"/>
+            <arg column="payment_time" javaType="java.util.Date"/>
+            <arg column="remark_service" javaType="java.lang.String"/>
+            <arg column="remark_user" javaType="java.lang.String"/>
+            <arg column="store_id" javaType="java.lang.Integer"/>
+            <arg column="store_mobileno" javaType="java.lang.String"/>
+            <arg column="store_name" javaType="java.lang.String"/>
+            <arg column="user_nickname" javaType="java.lang.String"/>
+            <arg column="total_price" javaType="java.lang.Long"/>
+            <arg column="actual_price" javaType="java.lang.Long"/>
+            <arg column="freight_price" javaType="java.lang.Long"/>
+            <arg column="coupon_price" javaType="java.lang.Long"/>
+            <arg column="activity_discount_price" javaType="java.lang.Long"/>
+            <arg column="coupon_id" javaType="java.lang.Integer"/>
+            <arg column="activity_discount_id" javaType="java.lang.Integer"/>
+            <arg column="consignee_name" javaType="java.lang.String"/>
+            <arg column="consignee_mobile" javaType="java.lang.String"/>
+            <arg column="consignee_address" javaType="java.lang.String"/>
+            <arg column="deliver_state" javaType="java.lang.Integer"/>
+            <arg column="deliver_time" javaType="java.util.Date"/>
+            <arg column="express_name" javaType="java.lang.String"/>
+            <arg column="express_code" javaType="java.lang.String"/>
+            <arg column="express_no" javaType="java.lang.String"/>
+            <arg column="express_state" javaType="java.lang.Integer"/>
+            <arg column="order_id" javaType="java.lang.Integer"/>
+            <arg column="order_gmtcreate" javaType="java.util.Date"/>
+            <arg column="order_gmtmodified" javaType="java.util.Date"/>
+            <arg column="apply_state" javaType="java.lang.Integer"/>
+            <arg column="return_type" javaType="java.lang.Integer"/>
+            <arg column="return_state" javaType="java.lang.Integer"/>
+            <arg column="return_create" javaType="java.util.Date"/>
+            <arg column="return_update" javaType="java.util.Date"/>
+            <arg column="auditor1" javaType="java.lang.String"/>
+            <arg column="auditor2" javaType="java.lang.String"/>
+            <arg column="audit_time1" javaType="java.util.Date"/>
+            <arg column="audit_time2" javaType="java.util.Date"/>
+            <arg column="audit_reason1" javaType="java.lang.String"/>
+            <arg column="audit_reason2" javaType="java.lang.String"/>
+            <arg column="refund_person" javaType="java.lang.String"/>
+            <arg column="refund_time" javaType="java.util.Date"/>
+            <arg column="field1" javaType="java.lang.String"/>
+            <arg column="field2" javaType="java.lang.String"/>
+            <arg column="field3" javaType="java.lang.String"/>
+            <arg column="field4" javaType="java.lang.String"/>
+            <arg column="field5" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+
+    <!--<select id="comsumerRefundListPage" resultMap="BaseResultMap">-->
+    <!--SELECT id,refund_no,refund_mode, manual_refund_price, order_no,master_state, order_source,payment_no,payment_state,payment_type,payment_time,remark_service,remark_user,-->
+    <!--store_id, store_mobileno,store_name, user_nickname,total_price,actual_price,freight_price,coupon_price,activity_discount_price,coupon_id,-->
+    <!--activity_discount_id,consignee_name,consignee_mobile,consignee_address,deliver_state,deliver_time,express_name,-->
+    <!--express_code, express_no,express_state,order_id,order_gmtcreate,order_gmtmodified,apply_state,return_type,-->
+    <!--return_state,return_create,return_update,auditor1,auditor2,audit_time1,audit_time2,-->
+    <!--audit_reason1,audit_reason2,refund_person,refund_time,field1,field2,field3,field4,field5 FROM order_refund WHERE  field1 = #{params.userId}-->
+    <!--</select>-->
+    <select id="comsumerRefundListPage" resultMap="BaseResultMap">
+        SELECT * FROM order_refund WHERE  field1 = #{params.userId} ORDER BY return_create DESC
+    </select>
+
+    <select id="storeRefundListPage" resultMap="BaseResultMap">
+        SELECT * FROM order_refund WHERE  store_id = #{params.storeId} ORDER BY return_create DESC
+    </select>
+
+
+    <select id="selectRefundDOByRefundNo" resultMap="BaseResultMap">
+        SELECT * FROM order_refund WHERE  refund_no = #{refundNo} ORDER BY return_create DESC
+    </select>
+
+
+    <select id="listRefundPage" resultMap="BaseResultMap">
+        SELECT id,refund_no,refund_mode, manual_refund_price, order_no,master_state, order_source,payment_no,payment_state,payment_type,payment_time,remark_service,remark_user,
+        store_id, store_mobileno,store_name, user_nickname,total_price,actual_price,freight_price,coupon_price,activity_discount_price,coupon_id,
+        activity_discount_id,consignee_name,consignee_mobile,consignee_address,deliver_state,deliver_time,express_name,
+        express_code, express_no,express_state,order_id,order_gmtcreate,order_gmtmodified,apply_state,return_type,
+        return_state,return_create,return_update,auditor1,auditor2,audit_time1,audit_time2,
+        audit_reason1,audit_reason2,refund_person,refund_time,field1,field2,field3,
+        (select u.nickname from `user_account` as u where u.mobile_no = `auditor1`) as field4,
+        field5 FROM order_refund
+        WHERE refund_no is not null
+        <if test="params.userId != null ">
+            AND field1 = #{params.userId}
+        </if>
+        <if test="params.storeId != null ">
+            AND store_id = #{params.storeId}
+        </if>
+        <if test="params.orderNo != null ">
+            AND order_no = #{params.orderNo}
+        </if>
+        <if test="params.consigneeName != null ">
+            AND consignee_name LIKE CONCAT('%','${params.consigneeName}','%')
+        </if>
+        <if test="params.consigneeMobile != null ">
+            AND consignee_mobile LIKE CONCAT('%','${params.consigneeMobile}','%')
+        </if>
+        <choose>
+            <when test="params.startTime != null and params.endTime != null ">
+                AND (#{params.startTime} &lt;= return_create AND return_create &lt;= #{params.endTime})
+            </when>
+            <when test="params.startTime != null">
+                AND #{params.startTime} &lt;= return_create
+            </when>
+            <when test="params.endTime != null ">
+                AND return_create &lt;= #{params.endTime}
+            </when>
+        </choose>
+        <if test="params.masterState != null">
+            AND master_state = #{params.masterState}
+            <if test="params.paymentState != null">
+                AND payment_state = #{params.paymentState}
+            </if>
+            <if test="params.deliverState != null">
+                AND deliver_state = #{params.deliverState}
+            </if>
+        </if>
+        ORDER BY return_update DESC
+    </select>
+</mapper>

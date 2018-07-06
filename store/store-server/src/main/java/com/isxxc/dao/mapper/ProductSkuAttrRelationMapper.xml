@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ProductSkuAttrRelationDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ProductSkuAttrRelationDO">
+        <id column="id" property="id"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="attr_key_id" property="attrKeyId"/>
+        <result column="attr_value_id" property="attrValueId"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.ProductAttrInfoDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer"/>
+            <arg column="sku_id" javaType="java.lang.Integer"/>
+            <arg column="attr_key_id" javaType="java.lang.Integer"/>
+            <arg column="attr_value_id" javaType="java.lang.Integer"/>
+            <arg column="is_deleted" javaType="java.lang.Integer"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_create" javaType="java.util.Date"/>
+            <arg column="attrKeyName" javaType="java.lang.String"/>
+            <arg column="attrValueName" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectDTOBySkuId" resultMap="DtoBaseResultMap">
+        SELECT
+            s.`id`,s.`sku_id`,s.`attr_key_id`,s.`attr_value_id`,s.`is_deleted`,s.`gmt_modified`,s.`gmt_create`,
+            (SELECT k.`name` FROM `product_attr_key` AS k WHERE k.`id` = s.`attr_key_id`) AS attrKeyName,
+            (SELECT v.`name` FROM `product_attr_value` AS v WHERE v.`id` = s.`attr_value_id`) AS attrValueName
+        FROM `product_sku_attr_relation` AS s
+        WHERE s.`sku_id` = #{skuId} AND s.is_deleted = #{isDeleted}
+    </select>
+
+    <select id="selectDTOById" resultMap="DtoBaseResultMap">
+       SELECT
+            s.`id`,s.`sku_id`,s.`attr_key_id`,s.`attr_value_id`,s.`is_deleted`,s.`gmt_modified`,s.`gmt_create`,
+            (SELECT k.`name` FROM `product_attr_key` AS k WHERE k.`id` = s.`attr_key_id`) AS attrKeyName,
+            (SELECT v.`name` FROM `product_attr_value` AS v WHERE v.`id` = s.`attr_value_id`) AS attrValueName
+        FROM `product_sku_attr_relation` AS s
+        WHERE s.`id` = #{id}
+    </select>
+</mapper>

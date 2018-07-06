@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.FinancingInfoDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.isxxc.domain.entity.FinancingInfoDO">
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="name" property="name" />
+		<result column="category" property="category" />
+		<result column="amount" property="amount" />
+		<result column="description" property="description" />
+		<result column="characteristic" property="characteristic" />
+		<result column="remark" property="remark" />
+		<result column="keyword" property="keyword" />
+		<result column="contacts" property="contacts" />
+		<result column="mobile_no" property="mobileNo" />
+		<result column="audit_state" property="auditState" />
+		<result column="puslish_state" property="puslishState" />
+		<result column="publish_time" property="publishTime" />
+		<result column="is_recommend" property="isRecommend" />
+		<result column="recommend_time" property="recommendTime" />
+		<result column="is_deleted" property="isDeleted" />
+		<result column="gmt_modified" property="gmtModified" />
+		<result column="gmt_create" property="gmtCreate" />
+	</resultMap>
+
+</mapper>

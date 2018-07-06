@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ProductDealStatisticsDAO">
+
+    <!--分页查询商品成交信息统计列表-->
+    <select id="listPage" resultType="com.isxxc.domain.dto.ProductDealStatisticsDTO">
+SELECT
+        DATE_FORMAT(a.gmt_modified, "%Y-%m-%d %H:%m:%s") AS "modifiedDate",
+        a.spu_title AS "productName",
+        sum(a.num) AS "productDealCount",
+        sum(a.total_price) AS "productDealAmount"
+FROM
+        order_item AS a,
+        order_info AS b
+WHERE
+        a.order_info_id = b.id
+        AND b.master_state = 2
+        AND b.is_deleted = 0
+        <if test="params != null ">
+        <choose>
+          <when test="params.startTime != null and params.endTime != null ">
+            AND (#{params.startTime} &lt;= a.gmt_modified AND a.gmt_modified &lt;= #{params.endTime})
+          </when>
+          <when test="params.startTime != null">
+            AND #{params.startTime} &lt;= a.gmt_modified
+          </when>
+          <when test="params.endTime != null ">
+            AND a.gmt_modified &lt;= #{params.endTime}
+          </when>
+        </choose>
+      </if>
+GROUP BY DAY ( a.gmt_modified) order by  a.gmt_modified DESC
+
+
+    <!--查询商品成交信息统计列表-->
+    </select>
+    <select id="find" resultType="com.isxxc.domain.dto.ProductDealStatisticsDTO">
+SELECT
+        DATE_FORMAT(a.gmt_modified, "%Y-%m-%d %H:%m:%s") AS "modifiedDate",
+        a.spu_title AS "productName",
+        sum(a.num) AS "productDealCount",
+        sum(a.total_price) AS "productDealAmount"
+FROM
+        order_item AS a,
+        order_info AS b
+WHERE
+        a.order_info_id = b.id
+        AND b.master_state = 2
+        AND b.is_deleted = 0
+GROUP BY DAY ( a.gmt_modified) order by  a.gmt_modified DESC
+    </select>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.AdContentDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.AdContentDO">
+        <id column="id" property="id"/>
+        <result column="ad_space_id" property="adSpaceId"/>
+        <result column="title" property="title"/>
+        <result column="subtitle" property="subtitle"/>
+        <result column="content" property="content"/>
+        <result column="url" property="url"/>
+        <result column="publish_state" property="publishState"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.AdContentDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer"/>
+            <arg column="ad_space_id" javaType="java.lang.Integer"/>
+            <arg column="title" javaType="java.lang.String"/>
+            <arg column="subtitle" javaType="java.lang.String"/>
+            <arg column="content" javaType="java.lang.String"/>
+            <arg column="url" javaType="java.lang.String"/>
+            <arg column="sort" javaType="java.lang.Integer"/>
+            <arg column="is_deleted" javaType="java.lang.Integer"/>
+            <arg column="publish_state" javaType="java.lang.Integer"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_create" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+
+    <select id="listByCode" resultMap="DtoBaseResultMap">
+		SELECT
+          c.`id`,
+          c.`ad_space_id`,
+          c.`title`,
+          c.`subtitle`,
+          c.`content`,
+          c.`url`,
+          c.`publish_state`,
+          c.sort,
+          c.`is_deleted`,
+          c.`gmt_modified`,
+          c.`gmt_create`
+        FROM
+          `ad_content` AS c
+          LEFT JOIN `ad_space` AS s
+            ON c.`ad_space_id` = s.`id`
+        WHERE
+        s.`code` = #{code}
+        AND c.`publish_state` = #{publishState}
+        AND c.is_deleted = #{isDeleted}
+        ORDER BY c.sort ASC
+	</select>
+</mapper>

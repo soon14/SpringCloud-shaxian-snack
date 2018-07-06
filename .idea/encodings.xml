@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/admin-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/admin-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eureka-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/generator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/home" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/home/home-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/home/home-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/store" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/store/store-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/store/store-cms" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/store/store-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/store/store-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user/user-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user/user-auth" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user/user-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user/user-server" charset="UTF-8" />
+  </component>
+</project>

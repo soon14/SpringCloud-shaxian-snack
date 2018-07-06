@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ProductFreightTemplateItemDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ProductFreightTemplateItemDO">
+        <id column="id" property="id"/>
+        <result column="province_code" property="provinceCode"/>
+        <result column="city_code" property="cityCode"/>
+        <result column="area_code" property="areaCode"/>
+        <result column="price" property="price"/>
+        <result column="freight_template_id" property="freightTemplateId"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.ProductFreightTemplateItemDTO">
+        <id column="id" property="id"/>
+        <result column="province_code" property="provinceCode"/>
+        <result column="city_code" property="cityCode"/>
+        <result column="area_code" property="areaCode"/>
+        <result column="price" property="price"/>
+        <result column="freight_template_id" property="freightTemplateId"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="provinceName" property="provinceName"/>
+        <result column="cityName" property="cityName"/>
+        <result column="areaName" property="areaName"/>
+    </resultMap>
+
+    <select id="selectByFreightTemplateId" resultMap="DtoBaseResultMap">
+        SELECT
+          i.`id`,
+          i.`province_code`,
+          i.`city_code`,
+          i.`area_code`,
+          i.`price`,
+          i.`freight_template_id`,
+          i.`is_deleted`,
+          i.`gmt_modified`,
+          i.`gmt_modified`,
+          IF(ISNULL(i.`province_code`),NULL,(SELECT a.name FROM `area` AS a WHERE a.code = i.`province_code`)) AS provinceName,
+          IF(ISNULL(i.`city_code`),NULL,(SELECT a.name FROM `area` AS a WHERE a.code = i.`city_code`)) AS cityName,
+          IF(ISNULL(i.`area_code`),NULL,(SELECT a.name FROM `area` AS a WHERE a.code = i.`area_code`)) AS areaName
+        FROM
+          `product_freight_template_item` AS i
+         WHERE
+          i.`freight_template_id` = #{freightTemplateId}
+    </select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ProductSpecValueDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ProductSpecValueDO">
+        <id column="id" property="id" />
+        <result column="store_id" property="storeId" />
+        <result column="spec_key_id" property="specKeyId" />
+        <result column="name" property="name" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="gmt_create" property="gmtCreate" />
+    </resultMap>
+
+</mapper>

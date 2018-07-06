@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.UserRoleCountDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.isxxc.domain.entity.UserRoleDO">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="code" property="code" />
+		<result column="gmt_modified" property="gmtModified" />
+		<result column="gmt_create" property="gmtCreate" />
+	</resultMap>
+
+	<resultMap id="DtoResultMap" type="com.isxxc.domain.dto.UserRoleDTO">
+		<result column="countShop" property="countShop" />
+		<result column="countStore" property="countStore" />
+		<result column="countSupporting" property="countSupporting" />
+        <result column="countBanking" property="countBanking" />
+	</resultMap>
+
+    <resultMap id="ResultMap" type="com.isxxc.domain.dto.UserAccountOtherDTO">
+        <result column="sum" property="sum" />
+        <result column="date" property="date" />
+        <result column="name" property="name" />
+    </resultMap>
+
+	<select id="countUserShop" parameterType="com.isxxc.domain.dto.UserRoleDTO" resultType="Integer">
+		select COUNT(*) AS countShop from user_role where name = "门店商户";
+	</select>
+
+    <select id="countUserStore" parameterType="com.isxxc.domain.dto.UserRoleDTO" resultType="Integer">
+        select COUNT(*) AS countStore from user_role where name = "原料供应商";
+    </select>
+
+    <select id="countUserSupporting" parameterType="com.isxxc.domain.dto.UserRoleDTO" resultType="Integer">
+        select COUNT(*) AS countSupporting from user_role where name = "配套服务/文化服务";
+    </select>
+
+    <select id="countUserBanking" parameterType="com.isxxc.domain.dto.UserRoleDTO" resultType="Integer">
+        select COUNT(*) AS countBanking from user_role where name = "金融服务";
+    </select>
+
+	<select id="listPage" resultType="com.isxxc.domain.dto.UserAccountOtherDTO">
+		SELECT
+		gmt_create AS date,
+		name,
+		COUNT(code) AS sum
+		FROM user_role
+		<where>
+			<if test="userAccountR != null">
+				<choose>
+					<when test="userAccountR.startTime != null and userAccountR.endTime != null ">
+						AND (#{userAccountR.startTime} &lt;= gmt_create AND gmt_create &lt;= #{userAccountR.endTime})
+					</when>
+					<when test="userAccountR.startTime != null">
+						AND #{userAccountR.startTime} &lt;= gmt_create
+					</when>
+					<when test="userAccountR.endTime != null ">
+						AND gmt_create &lt;= #{userAccountR.endTime}
+					</when>
+				</choose>
+			</if>
+		</where>
+		GROUP BY gmt_create
+	</select>
+</mapper>

@@ -1,0 +1,9 @@
+server:
+  #tomcat运行端口
+  port: 8000
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: eureka-server

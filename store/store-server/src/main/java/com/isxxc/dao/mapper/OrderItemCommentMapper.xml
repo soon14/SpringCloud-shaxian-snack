@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.OrderItemCommentDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.OrderItemCommentDO">
+        <id column="id" property="id"/>
+        <result column="order_item_id" property="orderItemId"/>
+        <result column="store_id" property="storeId"/>
+        <result column="user_id" property="userId"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="describe_score" property="describeScore"/>
+        <result column="service_score" property="serviceScore"/>
+        <result column="comment" property="comment"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="reply" property="reply"/>
+        <result column="store_name" property="storeName"/>
+        <result column="product_name" property="productName"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="price" property="price"/>
+    </resultMap>
+
+    <resultMap id="BaseDTOResultMap" type="com.isxxc.domain.dto.OrderItemCommentDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long"/>
+            <arg column="order_item_id" javaType="java.lang.Integer"/>
+            <arg column="store_id" javaType="java.lang.Integer"/>
+            <arg column="user_id" javaType="java.lang.Integer"/>
+            <arg column="spu_id" javaType="java.lang.Integer"/>
+            <arg column="sku_id" javaType="java.lang.Integer"/>
+            <arg column="describe_score" javaType="java.lang.Integer"/>
+            <arg column="service_score" javaType="java.lang.Integer"/>
+            <arg column="comment" javaType="java.lang.String"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_created" javaType="java.util.Date"/>
+            <arg column="reply" javaType="java.lang.String"/>
+            <arg column="store_name" javaType="java.lang.String"/>
+            <arg column="product_name" javaType="java.lang.String"/>
+            <arg column="price" javaType="java.lang.String"/>
+            <arg column="nickname" javaType="java.lang.String"/>
+            <arg column="avaterPath" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectDTOList" resultMap="BaseResultMap">
+        SELECT c.*  FROM `order_item_comment` AS c
+        WHERE c.`spu_id` = #{params.spuId}
+        ORDER BY c.`gmt_created` DESC
+    </select>
+    <!--<select id="selectDTOList" resultMap="BaseDTOResultMap">-->
+        <!--SELECT-->
+          <!--c.*,u.`nickname`,u.`avater_path` AS avaterPath-->
+          <!--FROM `order_item_comment` AS c-->
+          <!--LEFT JOIN `user_account` AS u-->
+          <!--ON c.`user_id` = u.`id`-->
+        <!--WHERE c.`spu_id` = #{params.spuId}-->
+        <!--ORDER BY c.`gmt_created` DESC-->
+    <!--</select>-->
+
+    <select id="getInfoByOrderItemId" resultType="com.isxxc.domain.dto.OrderItemCommentDTO">
+        SELECT * FROM `order_item_comment` WHERE order_item_id = #{orderItemId}
+    </select>
+
+    <select id="getInfoByUserId" resultMap="BaseResultMap">
+        SELECT
+          c.*
+          FROM `order_item_comment` AS c
+        WHERE c.`user_id` = #{userId}
+        ORDER BY c.`gmt_created` DESC
+    </select>
+
+    <select id="getInfoByStoreId" resultMap="BaseResultMap">
+        SELECT
+          c.*
+          FROM `order_item_comment` AS c
+        WHERE c.`store_id` = #{storeId}
+        ORDER BY c.`gmt_created` DESC
+    </select>
+</mapper>

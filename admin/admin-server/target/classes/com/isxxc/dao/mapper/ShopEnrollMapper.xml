@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ShopEnrollDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ShopEnrollDO">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="mobile_no" property="mobileNo" />
+		<result column="shop_name" property="shopName" />
+		<result column="shop_address" property="shopAddress" />
+		<result column="shop_facade_img" property="shopFacadeImg" />
+		<result column="shop_hall_img" property="shopHallImg" />
+		<result column="hot_menu_img" property="hotMenuImg" />
+		<result column="shop_staff" property="shopStaff" />
+		<result column="shop_area" property="shopArea" />
+		<result column="annual_sales_volume" property="annualSalesVolume" />
+		<result column="dining_table_number" property="diningTableNumber" />
+		<result column="pos_status" property="posStatus" />
+		<result column="pos_brand" property="posBrand" />
+		<result column="order_dishes_type" property="orderDishesType" />
+		<result column="gathering_types" property="gatheringTypes" />
+		<result column="bank_no" property="bankNo" />
+		<result column="bank_name" property="bankName" />
+		<result column="bank_card_img" property="bankCardImg" />
+		<result column="identity_card_back_img" property="identityCardBackImg" />
+		<result column="identity_card_img" property="identityCardImg" />
+		<result column="leave_message" property="leaveMessage" />
+		<result column="business_license_img" property="businessLicenseImg" />
+		<result column="is_deleted" property="isDeleted" />
+		<result column="bank_card_back_img" property="bankCardBackImg" />
+		<result column="cashier_desk_img" property="cashierDeskImg" />
+		<result column="catering_service_license_img" property="cateringServiceLicenseImg" />
+		<result column="gmt_modified" property="gmtModified" />
+		<result column="gmt_create" property="gmtCreate" />
+	</resultMap>
+
+</mapper>

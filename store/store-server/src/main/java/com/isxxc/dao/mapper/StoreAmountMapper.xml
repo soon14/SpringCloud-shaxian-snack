@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.StoreAmountDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.StoreAmountDO">
+        <id column="id" property="id" />
+        <result column="store_id" property="storeId" />
+        <result column="amount" property="amount" />
+        <result column="total_extraction_amount" property="totalExtractionAmount" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="gmt_create" property="gmtCreate" />
+    </resultMap>
+
+    <select id="permitExtractAmount" resultType="java.lang.Long">
+        SELECT
+         (s.`amount` -
+          (SELECT IFNULL(SUM(sl.amount),0) FROM `store_amount_log` AS sl WHERE sl.store_amount_id = s.`id` AND sl.gmt_create > #{endTime})
+         ) AS permitExtractAmount FROM `store_amount` AS s WHERE s.`store_id` = #{storeId}
+    </select>
+
+</mapper>

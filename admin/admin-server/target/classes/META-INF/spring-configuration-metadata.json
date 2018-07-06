@@ -1,0 +1,22 @@
+{
+  "groups": [{
+    "name": "authenticationInterceptor",
+    "type": "cc.likq.config.AuthenticationInterceptor",
+    "sourceType": "cc.likq.config.AuthenticationInterceptor"
+  }],
+  "properties": [
+    {
+      "name": "authenticationInterceptor.exclude-class-method-list",
+      "type": "java.util.List<java.lang.String>",
+      "description": "拦截器排除拦截路径(方法)",
+      "sourceType": "cc.likq.config.AuthenticationInterceptor"
+    },
+    {
+      "name": "authenticationInterceptor.exclude-class-name-list",
+      "type": "java.util.List<java.lang.String>",
+      "description": "拦截器排除拦截路径(类)",
+      "sourceType": "cc.likq.config.AuthenticationInterceptor"
+    }
+  ],
+  "hints": []
+}

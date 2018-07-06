@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.LoansInfoDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.LoansInfoDO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="category" property="category"/>
+        <result column="type" property="type"/>
+        <result column="keyword" property="keyword"/>
+        <result column="contacts" property="contacts"/>
+        <result column="mobile_no" property="mobileNo"/>
+        <result column="audit_state" property="auditState"/>
+        <result column="ad_img" property="adImg"/>
+        <result column="puslish_state" property="puslishState"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="is_recommend" property="isRecommend"/>
+        <result column="recommend_time" property="recommendTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="dtoResultMap" type="com.isxxc.domain.dto.LoansInfoDTO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="category" property="category"/>
+        <result column="type" property="type"/>
+        <result column="keyword" property="keyword"/>
+        <result column="contacts" property="contacts"/>
+        <result column="mobile_no" property="mobileNo"/>
+        <result column="audit_state" property="auditState"/>
+        <result column="ad_img" property="adImg"/>
+        <result column="puslish_state" property="puslishState"/>
+        <result column="publish_time" property="publishTime"/>
+        <result column="is_recommend" property="isRecommend"/>
+        <result column="recommend_time" property="recommendTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+
+    <select id="listPage" resultMap="dtoResultMap">
+        SELECT
+        l.id,
+        l.user_id,
+        l.`name`,
+        l.description,
+        l.category,
+        l.type,
+        l.contacts,
+        l.mobile_no,
+        l.audit_state,
+        l.puslish_state,
+        l.publish_time,
+        l.is_recommend,
+        l.recommend_time,
+        l.is_deleted,
+        l.ad_img,
+        l.gmt_modified,
+        l.gmt_create,
+        (SELECT b.company_name FROM user_banking_profil as b WHERE b.user_id = l.user_id LIMIT 1) as
+        company_name
+        FROM
+        loans_info AS l
+        WHERE l.is_deleted = #{loansInfoDTO.isDeleted}
+        <if test="loansInfoDTO.auditState != null and loansInfoDTO.auditState != '' ">
+            AND l.audit_state = #{loansInfoDTO.auditState}
+        </if>
+        <if test="loansInfoDTO.puslishState != null and loansInfoDTO.puslishState != '' ">
+            AND l.puslish_state = #{loansInfoDTO.puslishState}
+        </if>
+        ORDER BY l.gmt_create DESC
+    </select>
+
+    <select id="getInfoById" resultMap="dtoResultMap">
+        SELECT
+            l.id,
+            l.user_id,
+            l.`name`,
+            l.description,
+            l.category,
+            l.type,
+            l.contacts,
+            l.mobile_no,
+            l.audit_state,
+            l.ad_img,
+            l.publish_time,
+            l.publish_time,
+            l.is_recommend,
+            l.recommend_time,
+            l.gmt_modified,
+            l.gmt_create,
+            (SELECT b.company_name FROM user_banking_profil as b WHERE b.user_id = l.user_id LIMIT 1) as company_name
+        FROM
+            loans_info AS l WHERE l.id = #{id}
+    </select>
+</mapper>

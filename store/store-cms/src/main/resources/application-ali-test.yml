@@ -1,0 +1,57 @@
+# 注册到eureka-server上
+eureka:
+  instance:
+    # 主机名称
+    hostname: ${spring.cloud.client.ipAddress}
+    # 自定义实例ID
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    # 显示IP地址
+    prefer-ip-address: true
+    # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-renewal-interval-in-seconds: 5
+    # 过期剔除时间，即服务续约到期时间（缺省为90s）
+    lease-expiration-duration-in-seconds: 10
+  client:
+    # 是否将eureka自身作为应用注册到eureka注册中心
+    register-with-eureka: true
+    # 客户端是否获取eureka服务器注册表上的注册信息，默认为true
+    fetch-registry: true
+    # 设置拉取服务注册信息时间（缺省为60s）
+    registry-fetch-interval-seconds: 30
+    # Eureka服务
+    serviceUrl:
+      #服务注册中心地址
+      defaultZone: http://127.0.0.1:8000/eureka/
+
+# 超时配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # Hystrix超时时间
+            timeoutInMilliseconds: 60000
+
+ribbon:
+  # 处理时间
+  ReadTimeout: 60000
+  # 连接时间
+  ConnectTimeout: 60000
+  # 同一实例最大重试次数，不包括首次调用
+  MaxAutoRetries: 0
+  # 重试其他实例的最大重试次数，不包括首次所选的server
+  MaxAutoRetriesNextServer: 1
+  # 最大http连接数，越大越好，但到到达一个临界点之后，就不会提高响应速度
+  MaxTotalHttpConnections: 2000
+
+feign:
+  httpclient:
+    enabled: true
+    timeToLive: 60000
+
+ueditor:
+  config: config.json
+  unified: true
+  upload-path: /home/shaxian/static/
+  url-prefix: http://static.ohrw.net/

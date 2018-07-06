@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ProductSpuImgDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ProductSpuImgDO">
+        <id column="id" property="id"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="name" property="name"/>
+        <result column="sort" property="sort"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="DTOBaseResultMap" type="com.isxxc.domain.dto.ProductSpuImgDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer"/>
+            <arg column="spu_id" javaType="java.lang.Integer"/>
+            <arg column="name" javaType="java.lang.String"/>
+            <arg column="sort" javaType="java.lang.Integer"/>
+            <arg column="is_deleted" javaType="java.lang.Integer"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_create" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectDTOBySpuId" resultMap="DTOBaseResultMap">
+       SELECT
+          id,spu_id,name,sort,is_deleted,gmt_modified,gmt_create
+        FROM product_spu_img
+        WHERE spu_id = #{spuId} AND is_deleted = #{isDeleted}
+        ORDER BY sort ASC
+    </select>
+
+    <select id="selectMainBySpuID" resultType="java.lang.String">
+        SELECT `name` FROM `product_spu_img` WHERE spu_id = #{spuId} ORDER BY sort LIMIT 1
+    </select>
+</mapper>

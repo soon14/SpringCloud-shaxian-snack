@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.UserSupportingProfilDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.UserSupportingProfilDO">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="company_name" property="companyName" />
+        <result column="province_code" property="provinceCode" />
+        <result column="city_code" property="cityCode" />
+        <result column="area_code" property="areaCode" />
+        <result column="address" property="address" />
+        <result column="contact" property="contact" />
+        <result column="mobile_no" property="mobileNo" />
+        <result column="business_license_img" property="businessLicenseImg" />
+        <result column="identity_card_front_img" property="identityCardFrontImg" />
+        <result column="identity_card_back_img" property="identityCardBackImg" />
+        <result column="service_introduce" property="serviceIntroduce" />
+        <result column="company_introduce" property="companyIntroduce" />
+        <result column="logo" property="logo" />
+        <result column="audit_state" property="auditState" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="gmt_create" property="gmtCreate" />
+    </resultMap>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT
+            id,user_id,company_name,province_code,
+            city_code,area_code,address,
+            contact,mobile_no,business_license_img,
+            identity_card_front_img,identity_card_back_img,
+            service_introduce,company_introduce,logo,audit_state,
+            gmt_modified,gmt_create
+        FROM
+          user_supporting_profil WHERE user_id = #{userId}
+          ORDER BY gmt_create DESC LIMIT 1
+    </select>
+
+</mapper>

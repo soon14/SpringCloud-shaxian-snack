@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.OrderItemDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.isxxc.domain.entity.OrderItemDO">
+        <id column="id" property="id"/>
+        <result column="order_info_id" property="orderInfoId"/>
+        <result column="sku_id" property="skuId"/>
+        <result column="spu_title" property="spuTitle"/>
+        <result column="sale_price" property="salePrice"/>
+        <result column="num" property="num"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="comment_state" property="commentState"/>
+        <result column="img" property="img"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
+
+    <resultMap id="DtoBaseResultMap" type="com.isxxc.domain.dto.OrderItemDTO">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer"/>
+            <arg column="order_info_id" javaType="java.lang.Integer"/>
+            <arg column="sku_id" javaType="java.lang.Integer"/>
+            <arg column="spu_title" javaType="java.lang.String"/>
+            <arg column="sale_price" javaType="java.lang.Long"/>
+            <arg column="num" javaType="java.lang.Integer"/>
+            <arg column="total_price" javaType="java.lang.Long"/>
+            <arg column="comment_state" javaType="java.lang.Integer"/>
+            <arg column="img" javaType="java.lang.String"/>
+            <arg column="gmt_modified" javaType="java.util.Date"/>
+            <arg column="gmt_create" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+
+    <select id="selectDTOByOrderId" resultMap="DtoBaseResultMap">
+        SELECT
+          id,order_info_id,sku_id,spu_title,sale_price,num,total_price,comment_state,img,gmt_modified,gmt_create
+        FROM order_item
+        WHERE order_info_id = #{orderId}
+    </select>
+
+    <update id="updateCommentByOrderId">
+        UPDATE `order_item` SET comment_state = #{commentState} WHERE order_info_id = #{orderId}
+    </update>
+
+</mapper>

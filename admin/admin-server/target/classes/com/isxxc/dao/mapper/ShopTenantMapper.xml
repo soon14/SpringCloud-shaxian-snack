@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isxxc.dao.ShopTenantDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.isxxc.domain.entity.ShopTenantDO">
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="title" property="title" />
+		<result column="acreage_min" property="acreageMin" />
+		<result column="acreage_max" property="acreageMax" />
+		<result column="transfer_amount_min" property="transferAmountMin" />
+		<result column="transfer_amount_max" property="transferAmountMax" />
+		<result column="rent_amount_min" property="rentAmountMin" />
+		<result column="rent_amount_max" property="rentAmountMax" />
+		<result column="description" property="description" />
+		<result column="contacts" property="contacts" />
+		<result column="mobile_no" property="mobileNo" />
+		<result column="province_code" property="provinceCode" />
+		<result column="city_code" property="cityCode" />
+		<result column="area_code" property="areaCode" />
+		<result column="audit_state" property="auditState" />
+		<result column="puslish_state" property="puslishState" />
+		<result column="publish_time" property="publishTime" />
+		<result column="is_recommend" property="isRecommend" />
+		<result column="recommend_time" property="recommendTime" />
+		<result column="is_deleted" property="isDeleted" />
+		<result column="gmt_modified" property="gmtModified" />
+		<result column="gmt_create" property="gmtCreate" />
+	</resultMap>
+
+</mapper>

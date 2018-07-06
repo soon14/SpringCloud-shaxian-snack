@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="admin-feign" />
+        <module name="admin-server" />
+        <module name="api-gateway" />
+        <module name="common-feign" />
+        <module name="common-model" />
+        <module name="common-server" />
+        <module name="common-util" />
+        <module name="eureka-server" />
+        <module name="generator" />
+        <module name="home-feign" />
+        <module name="home-server" />
+        <module name="store-api" />
+        <module name="store-cms" />
+        <module name="store-feign" />
+        <module name="store-server" />
+        <module name="user-api" />
+        <module name="user-auth" />
+        <module name="user-feign" />
+        <module name="user-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="admin" target="1.8" />
+      <module name="admin-feign" target="1.8" />
+      <module name="admin-server" target="1.8" />
+      <module name="api-gateway" target="1.8" />
+      <module name="common" target="1.8" />
+      <module name="common-feign" target="1.8" />
+      <module name="common-model" target="1.8" />
+      <module name="common-server" target="1.8" />
+      <module name="common-util" target="1.8" />
+      <module name="eureka-server" target="1.8" />
+      <module name="generator" target="1.8" />
+      <module name="home" target="1.8" />
+      <module name="home-feign" target="1.8" />
+      <module name="home-server" target="1.8" />
+      <module name="shaxian" target="1.8" />
+      <module name="store" target="1.8" />
+      <module name="store-api" target="1.8" />
+      <module name="store-cms" target="1.8" />
+      <module name="store-feign" target="1.8" />
+      <module name="store-server" target="1.8" />
+      <module name="user" target="1.8" />
+      <module name="user-api" target="1.8" />
+      <module name="user-auth" target="1.8" />
+      <module name="user-feign" target="1.8" />
+      <module name="user-server" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
